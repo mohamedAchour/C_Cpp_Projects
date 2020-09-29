@@ -12,14 +12,15 @@ using namespace std;
 int main()
 {
     int client, server;
-    int portNum= 1501;
+    int portNum= 9901;
     bool isExit=false;
     int bufsize=1024;
     char buffer[bufsize];
 
     struct sockaddr_in server_addr;
     socklen_t size; 
-
+    
+    //init socket
     client=socket(AF_INET, SOCK_STREAM, 0);
 
     if (client<0)

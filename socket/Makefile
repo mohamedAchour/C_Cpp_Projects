@@ -22,4 +22,4 @@ all : $(EXEFILE1) $(EXEFILE2)
 .PHONY : clean
 
 clean :
-	rm -rf $(OBJ_FILES1) $(EXEFILE1) $(OBJ_FILES2) $(EXEFILE2) *.s 	
+	rm -rf $(OBJ_FILES1) $(BIN)$(EXEFILE1) $(OBJ_FILES2) $(BIN)$(EXEFILE2) *.s 	
