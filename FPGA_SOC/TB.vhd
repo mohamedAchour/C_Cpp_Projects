@@ -24,21 +24,21 @@ architecture seq of tb is
 	
 	component CORDIC_rtl is
 		port(
-				clk:   in  std_logic;
-				phi:   in  signed(15 downto 0);
-				n:	     in  unsigned(7 downto 0);--natural range 0 to 14;
-				start: in  std_logic;
-				rst:    in  std_logic;
-				rdy:   out std_logic;
-				r1:     out signed(15 downto 0);
-				r2:	 out signed(15 downto 0)
+		    clk:   in  std_logic;
+                    phi:   in  signed(15 downto 0);
+		    n:	   in  unsigned(7 downto 0);--natural range 0 to 14;
+		    start: in  std_logic;
+		    rst:   in  std_logic;
+		    rdy:   out std_logic;
+		    r1:    out signed(15 downto 0);
+		    r2:	   out signed(15 downto 0)
 		   );
 	end component;
 	
 	--definition des signaux
 	signal clk,start,rst,rdy : std_logic;
-	signal phi,r1,r2	       :  signed(15 downto 0);
-	signal n				       :  unsigned(7 downto 0);
+	signal phi,r1,r2	 :  signed(15 downto 0);
+	signal n		 :  unsigned(7 downto 0);
 	
 	--on déclare ces signaux pour juste visualiser les résultat en virgule flottante
 	signal r1_f,r2_f,phi_f: real;
@@ -56,9 +56,9 @@ begin
 	
 	STIM:process
 	begin
-		rst<='1'; wait for 2 ns;
+		rst  <='1'; wait for 2 ns;
 		--on choisi ici 11 itérations
-		rst<='0';start<='1'; phi<=fp2fix(60.0,FACT_MUL_2);n<="00001011"; wait for 10 ns;	
+		rst  <='0';start<='1'; phi<=fp2fix(60.0,FACT_MUL_2);n<="00001011"; wait for 10 ns;	
 		start<='0';wait for 200 ns;
 		
 		start<='1'; phi<=fp2fix(38.0,FACT_MUL_2); wait for 10 ns;
