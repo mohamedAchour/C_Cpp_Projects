@@ -9,23 +9,23 @@ architecture arch of tb_calc_param is
 
 	component calc_param is
 	port(
-		  --inputs
-		  clk 	   : in std_logic;
-		  clr 		: in std_logic; 
-		  fin_cycle : in std_logic;
-		  per 		: in unsigned(15 downto 0);
-		  rapp_cycl : in unsigned(15 downto 0);
-		  tm 		   : in unsigned(7  downto 0);			  
-		  --outputs
-		  s1			: out unsigned(15 downto 0);
-		  s2			: out unsigned(15 downto 0);
-		  s3			: out unsigned(15 downto 0)
-		  );  
+	    --inputs
+	    clk       : in std_logic;
+	    clr       : in std_logic; 
+	    fin_cycle : in std_logic;
+	    per       : in unsigned(15 downto 0);
+	    rapp_cycl : in unsigned(15 downto 0);
+	    tm 	      : in unsigned(7  downto 0);			  
+	    --outputs
+	    s1	      : out unsigned(15 downto 0);
+	    s2	      : out unsigned(15 downto 0);
+	    s3	      : out unsigned(15 downto 0)
+	    );  
 	end component;
 	
 	signal clk,clr,fin_cycle        : std_logic;	
 	signal per, rapp_cycl, s1,s2,s3 : unsigned(15 downto 0);
-	signal tm 		 					  : unsigned(7  downto 0);	
+	signal tm                       : unsigned(7  downto 0);	
 	
 begin
 

@@ -5,16 +5,16 @@ use ieee.numeric_std.all;
 entity calc_param is
 		port(
 			  --inputs
-			  clk 	   : in std_logic;
-			  clr 		: in std_logic;             --set outputs to 0!
+			  clk 	    : in std_logic;
+			  clr       : in std_logic;             --set outputs to 0!
 			  fin_cycle : in std_logic;             --from out_gen block
-			  per 		: in unsigned(15 downto 0); --k in [4000,20000]
+			  per 	    : in unsigned(15 downto 0); --k in [4000,20000]
 			  rapp_cycl : in unsigned(15 downto 0); --at this stage we give it in [0,1023]
-			  tm 		   : in unsigned(7  downto 0); --give values in [0,255] 	  
+			  tm 	    : in unsigned(7  downto 0); --give values in [0,255] 	  
 			  --outputs
-			  s1			: out unsigned(15 downto 0);
-			  s2			: out unsigned(15 downto 0);
-			  s3			: out unsigned(15 downto 0)
+			  s1	    : out unsigned(15 downto 0);
+			  s2	    : out unsigned(15 downto 0);
+			  s3	    : out unsigned(15 downto 0)
 		);
 end entity;
 

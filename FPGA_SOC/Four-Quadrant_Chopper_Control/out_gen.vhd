@@ -3,18 +3,18 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity out_gen is
-		port(
-			  --inputs
-			  clk 		: in std_logic;
-			  clr			: in std_logic;
-			  s1			: in unsigned(15 downto 0);
-			  s2			: in unsigned(15 downto 0);
-			  s3			: in unsigned(15 downto 0);	  
-			  --outputs
-			  sn			: out std_logic;
-			  sp			: out std_logic;
-			  fin_cycle : out std_logic
-			);
+	port(
+	    --inputs
+	    clk       : in std_logic;
+	    clr	      : in std_logic;
+	    s1	      : in unsigned(15 downto 0);
+	    s2	      : in unsigned(15 downto 0);
+	    s3	      : in unsigned(15 downto 0);	  
+	    --outputs
+	    sn	      : out std_logic;
+	    sp	      : out std_logic;
+	    fin_cycle : out std_logic
+	    );
 end entity;
 
 architecture arch of out_gen is

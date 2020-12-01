@@ -9,20 +9,20 @@ architecture beh of tb is
 
 	component top is
 	port(
-		 --inputs
-		 clk 		  : in std_logic;
-		 clr 		  : in std_logic;
-		 secure 	  : in std_logic;
-		 per 		  : in unsigned(15 downto 0);
-		 rapp_cycl : in unsigned(15 downto 0);
-		 tm 		  : in unsigned(7 downto 0);
-		 --outpus
-		 
-		 T1 : out std_logic;
-		 T2 : out std_logic;
-		 T3 : out std_logic;
-		 T4 : out std_logic
-		 );
+	    --inputs
+	    clk       : in std_logic;
+	    clr       : in std_logic;
+	    secure    : in std_logic;
+	    per       : in unsigned(15 downto 0);
+	    rapp_cycl : in unsigned(15 downto 0);
+	    tm 	      : in unsigned(7 downto 0);
+	    --outpus
+	  
+	    T1 : out std_logic;
+	    T2 : out std_logic;
+	    T3 : out std_logic;
+	    T4 : out std_logic
+	   );
 	end component;
 	
 	signal  clk,clr,secure,T1,T2,T3,T4 : std_logic;
