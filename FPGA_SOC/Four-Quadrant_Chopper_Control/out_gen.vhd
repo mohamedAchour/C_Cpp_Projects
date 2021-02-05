@@ -3,47 +3,54 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity out_gen is
-	port(
-	    --inputs
-	    clk       : in std_logic;
-	    clr	      : in std_logic;
-	    s1	      : in unsigned(15 downto 0);
-	    s2	      : in unsigned(15 downto 0);
-	    s3	      : in unsigned(15 downto 0);	  
-	    --outputs
-	    sn	      : out std_logic;
-	    sp	      : out std_logic;
-	    fin_cycle : out std_logic
-	    );
+		port(
+			  --inputs
+			  clk 		: in std_logic;
+			  clr			: in std_logic;
+			  s1			: in unsigned(15 downto 0);
+			  s2			: in unsigned(15 downto 0);
+			  s3			: in unsigned(15 downto 0);	  
+			  --outputs
+			  sn			: out std_logic;
+			  sp			: out std_logic;
+			  fin_cycle : out std_logic
+			);
 end entity;
 
 architecture arch of out_gen is
 
-	--states
+	--defining states
 	type state_t is (T0,T1,T2,T3,T4,T5);
+	
+	--define state variable
 	signal state : state_t;
 
---counter signal
-signal count : unsigned (15 downto 0);
+	--counter signal
+	signal count : unsigned (15 downto 0);
 
 begin
-	--state evolution
+	
+	--state evolution process
+	--this state machine is explained in the report document
 	EVOL:process(clk,clr)
 	begin
 		if (clr='1') then
-			state<= T0;
-			fin_cycle<='0';
+			state<= T0;			
+			count <= (others => '0');
+			
 		elsif (clk'event and clk='1') then
 			case state is
 				when T0 =>
-					count <= (others => '0');
-					fin_cycle<='1';       --set fin_cycle for first period
-					state <= T1;
-				when T1 =>	
-					if (count<(s1-1)) then
+					if (count<3) then 
 						count <= count+1;
-					elsif (count=(s1-1)) then									
-						fin_cycle<='0';
+					else
+						count <= (others => '0');						
+						state <= T1;
+					end if;
+				when T1 =>	
+					if (count<(s1-1)) then --s1-1 because we start counting from 0
+						count <= count+1;   
+					elsif (count=(s1-1)) then	
 						count <= count+1;
 						state <= T2;
 					end if;
@@ -72,12 +79,27 @@ begin
 					if (count<2*s3-1) then
 						count <= count+1;
 					elsif (count=2*s3-1) then
-	 					--generate a flag 
-						fin_cycle<='1';
 						count    <=(others => '0');
 						state    <=T1;
 					end if;
 			end case;			
+		end if;
+	end process;
+	
+	--process to control fin_cycle signal
+	--the number of positive edges fin_cycle must be seted is already computed (reoprt document)
+	FIN_CYCLE_CONTROLER:process(clk,clr)
+	begin
+		if (clr='1') then
+			fin_cycle<='0';
+		elsif (clk'event and clk='1') then
+			if (state=T0 ) then --active fin_cycle one clock before the end of the cycle 
+				fin_cycle<='1';
+			elsif (count>2*s3-3) then
+				fin_cycle<='1';  --activate fin_cycle at the end of each cycle
+			else
+				fin_cycle<='0';
+			end if;	
 		end if;
 	end process;
 	

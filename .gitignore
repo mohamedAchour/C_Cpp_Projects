@@ -6,5 +6,22 @@
 *.cmd
 *.mod
 *.swp
+*.qws
+*.rpt
+*.csv
+*.bak
+*.qdf
+*.txt
+*.html
+*.xml
+*.svd
+*.regmap
+*.debuginfo
+*.
+FPGA_SOC/Four-Quadrant_Chopper_Control/incremental_db
+FPGA_SOC/Four-Quadrant_Chopper_Control/.qsys_edit
+FPGA_SOC/Four-Quadrant_Chopper_Control/hps_isw_handoff
+FPGA_SOC/Four-Quadrant_Chopper_Control/output_files
+FPGA_SOC/Four-Quadrant_Chopper_Control/simulation
 
 
