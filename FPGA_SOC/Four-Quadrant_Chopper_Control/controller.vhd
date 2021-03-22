@@ -4,31 +4,31 @@ use ieee.numeric_std.all;
 
 entity controller is
 	port ( 
-			clock           : in  std_logic;
-			reset 	       : in  std_logic; 
-			
-			--end cycle
-			end_cycle_in    : in  std_logic;
-			end_cycle_out   : out std_logic;
+	     clock           : in  std_logic;
+	     reset 	     : in  std_logic; 
+	
+	     --end cycle
+	     end_cycle_in    : in  std_logic;
+	     end_cycle_out   : out std_logic;
 
-			--secure
-			secure_in 		 : in  std_logic;  
+	     --secure
+	     secure_in 	     : in  std_logic;  
 			
-			--avmm signals
-			avmm_address    : in  std_logic_vector(1  downto 0); 			 
-			avmm_byteenable : in  std_logic_vector(1  downto 0);
-			avmm_read   	 : in  std_logic;			 
-			avmm_readdata   : out std_logic_vector(15 downto 0);
-			avmm_write   	 : in  std_logic;
-			avmm_writedata  : in  std_logic_vector(15 downto 0);
+	     --avmm signals
+	     avmm_address    : in  std_logic_vector(1  downto 0); 			 
+	     avmm_byteenable : in  std_logic_vector(1  downto 0);
+	     avmm_read       : in  std_logic;			 
+	     avmm_readdata   : out std_logic_vector(15 downto 0);
+	     avmm_write      : in  std_logic;
+	     avmm_writedata  : in  std_logic_vector(15 downto 0);
 			
-			per			    : out unsigned(15 downto 0);
-			rapp_cyc        : out unsigned(15 downto 0);
-			tm	             : out unsigned(7  downto 0);
+	     per	     : out unsigned(15 downto 0);
+	     rapp_cyc        : out unsigned(15 downto 0);
+	     tm	             : out unsigned(7  downto 0);
 			
-			--the controller bloc assigns reset signals to "calc_param" and "out_gen" blocs
-			clr             : out std_logic
-			);
+	     --the controller bloc assigns reset signals to "calc_param" and "out_gen" blocs
+	     clr             : out std_logic
+	    );
 end entity;
 
 architecture Behavior of controller is
@@ -36,9 +36,9 @@ architecture Behavior of controller is
 	--define registers
 	signal state_reg    : std_logic_vector(15 downto 0); --@00 : state_reg(0) -->M/A, state_reg(1) -->secure,
 																				  --state_reg(2) -->interrupt enable,state_reg(3) -->interrupt flag.
-	signal per_reg      : unsigned(15 downto 0);			  --@01
-	signal rapp_cyc_reg : unsigned(15 downto 0);			  --@10
-	signal tm_reg		  : unsigned(7  downto 0);         --@11
+	signal per_reg      : unsigned(15 downto 0);         --@01
+	signal rapp_cyc_reg : unsigned(15 downto 0);	     --@10
+	signal tm_reg       : unsigned(7  downto 0);         --@11
 	
 	signal control_sign : std_logic_vector(5 downto 0);
 	
@@ -108,7 +108,7 @@ begin
 					state_reg(3)  <=end_cycle_in;
 					
 				elsif (state_reg(2)= '0') then --if Interrupt flag is disabled
-					state_reg(3)  <='0';        --set flag bit to 0 (as default value)
+					state_reg(3)  <='0';   --set flag bit to 0 (as default value)
 				end if;	
 				
 			end if;		
@@ -131,9 +131,9 @@ begin
 				rapp_cyc <= (others => '0');
 				tm       <= (others => '0');
 			else			
-				per         <= per_reg ;
-				rapp_cyc 	<= rapp_cyc_reg;
-				tm       	<= tm_reg;		
+				per      <= per_reg ;
+				rapp_cyc <= rapp_cyc_reg;
+				tm       <= tm_reg;		
 			end if;
 		end if;
 	end process;
